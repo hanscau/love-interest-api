@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: %i[ show update destroy ]
+  skip_before_action:authorized, only: [:index, :show]
 
   # GET /topics
   def index
