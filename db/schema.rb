@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_074808) do
     t.string "firstName"
     t.string "lastName"
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
     t.text "bio"
     t.integer "gender"
     t.string "phoneNo"
