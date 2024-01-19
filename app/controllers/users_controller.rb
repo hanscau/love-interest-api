@@ -11,7 +11,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    @user = User.find_by(id: params[:id])
+    render json: {data: UserSerializer.new(@user)}, status: :created
   end
 
   # POST /users
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    @user = User.find_by(id: params[:id])
     if @user.update(user_params)
       render json: @user
     else
