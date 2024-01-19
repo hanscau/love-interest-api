@@ -4,6 +4,7 @@ one:
   firstName: MyString
   lastName: MyString
   username: MyString
+  password: MyString
   bio: MyText
   gender: 1
   phoneNo: MyString
@@ -13,6 +14,7 @@ two:
   firstName: MyString
   lastName: MyString
   username: MyString
+  password: MyString
   bio: MyText
   gender: 1
   phoneNo: MyString
