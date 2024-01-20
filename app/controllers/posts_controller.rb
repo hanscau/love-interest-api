@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
-  skip_before_action :authorized, only: [:index, :show]
+  skip_before_action :authorized, only: [:index, :show, :topic_posts]
 
   # GET /posts
   def index
@@ -11,7 +11,12 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    @post = Post.joins(:topic, :user).select('posts.*', 'topics.topic', 'users.firstName', 'users.lastName', 'users.profileImageURL').find(params[:id])
+    @post = Post.joins(:topic, :user).find(params[:id])
+    render json: @post
+  end
+
+  def topic_posts
+    @post = Post.joins(:topic, :user).where(topic_id: params[:topic_id])
     render json: @post
   end
 
