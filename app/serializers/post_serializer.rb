@@ -4,5 +4,6 @@ class PostSerializer < ActiveModel::Serializer
     attribute :topic_id, key: :topicID
     has_one :user
     has_one :topic
+    has_many :post_likes
   end
   

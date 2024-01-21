@@ -7,3 +7,9 @@ bin/rails g scaffold Post user:references topic:references title:string tags:str
 bin/rails g scaffold Comment user:references post:references commentText:text --force
 
 bin/rails g scaffold Reply user:references comment:references replyText:text --force
+
+bin/rails g scaffold PostLike user:references post:references --force
+
+bin/rails g scaffold CommentLike user:references comment:references --force
+
+bin/rails g scaffold ReplyLike user:references reply:references --force

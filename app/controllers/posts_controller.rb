@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    @post = Post.joins(:topic, :user).find(params[:id])
+    @post = Post.includes(:topic, :user, :post_likes).find(params[:id])
     render json: @post
   end
 

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_20_152243) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_21_093226) do
+  create_table "comment_likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "comment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_comment_likes_on_comment_id"
+    t.index ["user_id"], name: "index_comment_likes_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -19,6 +28,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_152243) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "post_likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_likes_on_post_id"
+    t.index ["user_id"], name: "index_post_likes_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -45,6 +63,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_152243) do
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
+  create_table "reply_likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "reply_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reply_id"], name: "index_reply_likes_on_reply_id"
+    t.index ["user_id"], name: "index_reply_likes_on_user_id"
+  end
+
   create_table "topics", force: :cascade do |t|
     t.string "topic"
     t.string "topicImageURL"
@@ -65,10 +92,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_152243) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comment_likes", "comments"
+  add_foreign_key "comment_likes", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "post_likes", "posts"
+  add_foreign_key "post_likes", "users"
   add_foreign_key "posts", "topics"
   add_foreign_key "posts", "users"
   add_foreign_key "replies", "comments"
   add_foreign_key "replies", "users"
+  add_foreign_key "reply_likes", "replies"
+  add_foreign_key "reply_likes", "users"
 end
