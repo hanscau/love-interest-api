@@ -4,9 +4,8 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
-
-    render json: @posts
+    @posts = Post.all.with_attached_image
+    render json: @posts, include: ['user', 'topic', 'post_likes', 'image'], status: :ok
   end
 
   # GET /posts/1
@@ -22,6 +21,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
+    # @post = Post.new(post_params)
     @post = Post.new(post_params)
 
     if @post.save
@@ -33,16 +33,38 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   def update
-    if @post.update(post_params)
-      render json: @post
-    else
-      render json: @post.errors, status: :unprocessable_entity
-    end
+
+    post_record = Post.find(params[:id])
+    to_delete = params(:image_to_delete)
+    post_record.update(post_record_params)
+
+    if to_delete
+      image = post_record.image.find(id)
+      image.purse_later
+    end 
+
+    render json: {
+      post: post_record,
+      status: {code:202, message: 'Post updated successfully.'}
+    }, status: :accepted
+
   end
 
   # DELETE /posts/1
   def destroy
+    @post = Post.find(params[:id])
     @post.destroy!
+  end
+
+  def image
+    return unless object.image.attached?
+    object.image.blob.attributes
+          .slice('filename', 'byte_size', 'id')
+          .merge(url: image_url(object.image))
+  end
+
+  def image_url(image)
+    rails_blob_path(image, only_path: true)
   end
 
   private
@@ -53,6 +75,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:user_id, :topic_id, :title, :tags, :contentType, :content, :contentImageURL)
+      params.permit(:user_id, :topic_id, :title, :tags, :contentType, :content, :contentImageURL, :image)
     end
 end

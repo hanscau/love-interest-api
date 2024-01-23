@@ -39,6 +39,9 @@ gem 'jwt'
 gem 'bcrypt', '~> 3.1.7'
 gem 'active_model_serializers', '~> 0.10.12'
 
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'aws-sdk-s3', require: false
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]

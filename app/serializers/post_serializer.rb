@@ -5,5 +5,10 @@ class PostSerializer < ActiveModel::Serializer
     has_one :user
     has_one :topic
     has_many :post_likes
+    include Rails.application.routes.url_helpers
+
+    def contentImageURL
+      rails_blob_url(object.image) if object.image.attached?
+    end
   end
   
