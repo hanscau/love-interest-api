@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_23_071929) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_23_121929) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_23_071929) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "interest_relations", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_interest_relations_on_recipient_id"
+    t.index ["sender_id"], name: "index_interest_relations_on_sender_id"
   end
 
   create_table "post_likes", force: :cascade do |t|
@@ -126,6 +135,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_23_071929) do
   add_foreign_key "comment_likes", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "interest_relations", "users", column: "recipient_id"
+  add_foreign_key "interest_relations", "users", column: "sender_id"
   add_foreign_key "post_likes", "posts"
   add_foreign_key "post_likes", "users"
   add_foreign_key "posts", "topics"

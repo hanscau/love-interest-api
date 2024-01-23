@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :interest_relations
   resources :reply_likes
   resources :comment_likes
   resources :post_likes
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
   post '/auth/login', to: 'auth#login'
 
   get '/posts/topic/:topic_id', to: 'posts#topic_posts'
+  get '/interest_relations/matches/:id', to: 'interest_relations#get_matches'
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

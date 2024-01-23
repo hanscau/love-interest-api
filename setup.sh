@@ -13,3 +13,5 @@ bin/rails g scaffold PostLike user:references post:references --force
 bin/rails g scaffold CommentLike user:references comment:references --force
 
 bin/rails g scaffold ReplyLike user:references reply:references --force
+
+bin/rails g scaffold InterestRelation user:references user:references --force
