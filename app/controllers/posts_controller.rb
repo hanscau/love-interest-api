@@ -33,10 +33,9 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   def update
-
-    post_record = Post.find(params[:id])
+    @post = Post.find(params[:id])
     to_delete = params(:image_to_delete)
-    post_record.update(post_record_params)
+    @post.update(post_params)
 
     if to_delete
       image = post_record.image.find(id)
@@ -75,6 +74,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.permit(:user_id, :topic_id, :title, :tags, :contentType, :content, :contentImageURL, :image)
+      params.permit(:user_id, :topic_id, :title, :tags, :contentType, :content, :image)
     end
 end

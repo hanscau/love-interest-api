@@ -5,14 +5,13 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-
     render json: @users
   end
 
   # GET /users/1
   def show
     @user = User.find_by(id: params[:id])
-    render json: {data: UserSerializer.new(@user)}, status: :created
+    render json: @user
   end
 
   # POST /users
@@ -22,23 +21,43 @@ class UsersController < ApplicationController
     render json: {
         user: UserSerializer.new(user), 
         token: @token
-    }, status: :created
+    }, include: ['image'], status: :created
   end
 
   # PATCH/PUT /users/1
   def update
-    @user = User.find_by(id: params[:id])
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
+    @user = User.find(params[:id])
+    to_delete = params(:image_to_delete)
+    @user.update(user_params)
+
+    if to_delete
+      image = post_record.image.find(id)
+      image.purse_later
+    end 
+
+    render json: {
+      post: post_record,
+      status: {code:202, message: 'Post updated successfully.'}
+    }, status: :accepted
   end
 
   # DELETE /users/1
   def destroy
+    @user = User.find(params[:id])
     @user.destroy!
   end
+
+  def image
+    return unless object.image.attached?
+    object.image.blob.attributes
+          .slice('filename', 'byte_size', 'id')
+          .merge(url: image_url(object.image))
+  end
+
+  def image_url(image)
+    rails_blob_path(image, only_path: true)
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -48,7 +67,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:firstName, :lastName, :username, :bio, :gender, :phoneNo, :profileImageURL, :password)
+      params.permit(:firstName, :lastName, :username, :bio, :gender, :phoneNo, :image, :password)
     end
 
     def handle_invalid_record(e)
