@@ -1,22 +1,29 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show update destroy ]
-  skip_before_action :authorized, only: [:index, :show, :topic_posts]
+  skip_before_action :authorized, only: [:index, :show, :topic_posts, :user_posts]
 
   # GET /posts
   def index
-    @posts = Post.all.with_attached_image
-    render json: @posts, include: ['user', 'topic', 'post_likes', 'image'], status: :ok
+    @posts = Post.all.with_attached_image.includes(:topic, :user, :post_likes)
+    render json: @posts, status: :ok
   end
 
   # GET /posts/1
   def show
-    @post = Post.includes(:topic, :user, :post_likes).find(params[:id])
-    render json: @post
+    @posts = Post.includes(:topic, :user, :post_likes).find(params[:id])
+    render json: @posts, status: :ok
   end
 
+  #GET /posts/topic/:topic_id
   def topic_posts
-    @post = Post.joins(:topic, :user).where(topic_id: params[:topic_id])
-    render json: @post
+    @posts = Post.all.with_attached_image.includes(:topic, :user, :post_likes).where(topic_id: params[:topic_id])
+    render json: @posts, status: :ok
+  end
+
+  #GET /posts/user/:user_id
+  def user_posts
+    @posts = Post.all.with_attached_image.includes(:topic, :user, :post_likes).where(user_id: params[:user_id])
+    render json: @posts, status: :ok
   end
 
   # POST /posts

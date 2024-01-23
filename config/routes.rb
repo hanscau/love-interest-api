@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post '/auth/login', to: 'auth#login'
 
   get '/posts/topic/:topic_id', to: 'posts#topic_posts'
+  get '/posts/user/:user_id', to: 'posts#user_posts'
+
   get '/interest_relations/matches/:id', to: 'interest_relations#get_matches'
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
