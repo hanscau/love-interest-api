@@ -27,18 +27,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     @user = User.find(params[:id])
-    to_delete = params(:image_to_delete)
+    # to_delete = params(:image_to_delete)
     @user.update(user_params)
 
-    if to_delete
-      image = post_record.image.find(id)
-      image.purse_later
-    end 
+    # if to_delete
+    #   image = @user.image.find(id)
+    #   image.purse_later
+    # end 
 
-    render json: {
-      post: post_record,
-      status: {code:202, message: 'Post updated successfully.'}
-    }, status: :accepted
+    render json: @user, status: :accepted
   end
 
   # DELETE /users/1
@@ -56,6 +53,10 @@ class UsersController < ApplicationController
 
   def image_url(image)
     rails_blob_path(image, only_path: true)
+  end
+
+  def profileImageURL
+    rails_blob_url(object.image) if object.image.attached?
   end
 
 

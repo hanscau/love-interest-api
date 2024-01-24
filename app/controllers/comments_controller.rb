@@ -11,9 +11,9 @@ class CommentsController < ApplicationController
 
   # GET /comments/1
   def show
-    @comment = Comment.includes(:user, :comment_likes, replies: [:user, :reply_likes]).where(post_id: params[:id])
-    render json: @comment.as_json(include: [:user, :comment_likes, { replies: { include: [:user, :reply_likes] } }])
-  end 
+    @comment = Comment.includes(:comment_likes, :user, :replies).where(post_id: params[:id]).order(created_at: :desc)
+    render json: @comment
+  end
 
   # POST /comments
   def create

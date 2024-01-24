@@ -11,8 +11,8 @@ class RepliesController < ApplicationController
 
   # GET /replies/1
   def show
-    @reply = Reply.joins(:user).where(comment_id: params[:id])
-    render json: @reply
+    @reply = Reply.includes(:reply_likes, :user,).where(comment_id: params[:id])
+    render json: @comment
   end
 
   # POST /replies

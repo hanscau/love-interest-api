@@ -7,9 +7,8 @@ class InterestRelationsController < ApplicationController
     render json: @interest_relations
   end
 
-  # GET /interest_relations/:id
-  def show
-
+  # /interest_relations/matches/:id
+  def get_matches
     sent_interest = InterestRelation.where(sender_id: params[:id])
     received_interest = InterestRelation.where(recipient_id: params[:id]).pluck(:sender_id)
 
@@ -21,9 +20,15 @@ class InterestRelationsController < ApplicationController
 
     no_match_users = User.where(id: non_match_recipient_ids).select(:id, :firstName, :lastName, :profileImageURL, :created_at)
     match_users = User.where(id: match_user_ids).select(:id, :firstName, :lastName, :profileImageURL, :phoneNo, :created_at)
-
+    
     render json: { no_match_users: no_match_users, match_users: match_users }, status: :ok
   end
+
+    # GET /interest_relations/:id
+    def show
+      @sent_interest = InterestRelation.where(sender_id: params[:id])
+      render json: @sent_interest, status: :ok
+    end
 
   # POST /interest_relations
   def create

@@ -17,7 +17,7 @@ class TopicsController < ApplicationController
 
   # POST /topics
   def create
-    @topic = Topic.new(topic_params)
+    @topic = Topic.new(topic: params[:topicName], topicImageURL: params[:topicImageURL])
 
     if @topic.save
       render json: @topic, status: :created, location: @topic
@@ -48,6 +48,6 @@ class TopicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def topic_params
-      params.require(:topic).permit(:topic, :topicImageURL)
+      params.permit(:topicName, :topicImageURL)
     end
 end
