@@ -25,10 +25,10 @@ class InterestRelationsController < ApplicationController
   end
 
     # GET /interest_relations/:id
-    def show
-      @sent_interest = InterestRelation.where(sender_id: params[:id])
-      render json: @sent_interest, status: :ok
-    end
+  def show
+    @sent_interest = InterestRelation.where(sender_id: params[:id])
+    render json: @sent_interest, status: :ok
+  end
 
   # POST /interest_relations
   def create

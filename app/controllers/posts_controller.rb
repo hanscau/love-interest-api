@@ -41,18 +41,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     @post = Post.find(params[:id])
-    to_delete = params(:image_to_delete)
     @post.update(post_params)
-
-    if to_delete
-      image = post_record.image.find(id)
-      image.purse_later
-    end 
-
-    render json: {
-      post: post_record,
-      status: {code:202, message: 'Post updated successfully.'}
-    }, status: :accepted
+    render json: @post, status: :accepted
 
   end
 
