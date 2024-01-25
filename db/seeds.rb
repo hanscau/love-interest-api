@@ -8,93 +8,19 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.find_or_create_by!(firstName:"Bob",
-            lastName:"Smith",
-            username:"bobsmith",
-            password_digest:"$2a$12$wtzLlVl6kkBlfrTqkDgkBOuSlevDt7GU93mPaK/fPlF6JW2sO6IIe",
-            bio:"I am a person",
-            gender:0,
-            phoneNo:"1234567890",
-            profileImageURL:"https://api.dicebear.com/7.x/big-ears/png?seed=Cleo")
+Topic.find_or_create_by!(topic:"Pottery", topicImageURL:"https://www.thecrucible.org/wp-content/uploads/2021/12/claypots-g4a085aedc_1920.jpeg")
+Topic.find_or_create_by!(topic:"Photography", topicImageURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgZGra7-QjZgjVyw4GuUCGM9-JbdXcGmfLUA&usqp=CAU")
+Topic.find_or_create_by!(topic:"Cooking", topicImageURL:"https://www.foodandwine.com/thmb/O2ZjV3L_cNcz258bkrDgrYPanD0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/What-Is-Chaos-Cooking-TikToks-Latest-Obsession-FT-BLOG0723-be130eb8cffe400eb13ccfbe47de733a.jpg")
+Topic.find_or_create_by!(topic:"Dancing", topicImageURL:"https://static.vecteezy.com/system/resources/previews/009/373/613/non_2x/abstract-banner-design-with-silhouettes-of-people-dancing-free-vector.jpg")
 
-User.find_or_create_by!(firstName:"Alice",
-            lastName:"Johnson",
-            username:"alicejohnson",
-            password_digest:"$2a$12$wtzLlVl6kkBlfrTqkDgkBOuSlevDt7GU93mPaK/fPlF6JW2sO6IIe",
-            bio:"I love coding",
-            gender:1,
-            phoneNo:"0987654321",
-            profileImageURL:"https://api.dicebear.com/7.x/big-ears/png?seed=Alex")
+Topic.find_or_create_by!(topic:"Gaming", topicImageURL:"https://www.ubp.com/files/live/sites/ubp/files/image/banner_newsroom/200124_Vignette_Web_Detail.jpg")
+Topic.find_or_create_by!(topic:"Gym", topicImageURL:"https://www.coinstreet.org/sites/default/files/styles/banner_image/public/2023-06/Colombo%20centre%20gym%20weights.jpg?itok=Fh89o5ZM")
+Topic.find_or_create_by!(topic:"Programming", topicImageURL:"https://ecampusontario.pressbooks.pub/app/uploads/sites/2109/2021/11/programming-gb0e197598_1920.jpg")
+Topic.find_or_create_by!(topic:"Flowers", topicImageURL:"https://img.freepik.com/free-photo/natures-beauty-captured-colorful-flower-close-up-generative-ai_188544-8593.jpg?size=626&ext=jpg&ga=GA1.1.632798143.1706054400&semt=sph")
 
-User.find_or_create_by!(firstName:"John",
-            lastName:"Doe",
-            username:"johndoe",
-            password_digest:"$2a$12$wtzLlVl6kkBlfrTqkDgkBOuSlevDt7GU93mPaK/fPlF6JW2sO6IIe",
-            bio:"I am a software engineer",
-            gender:0,
-            phoneNo:"9876543210",
-            profileImageURL:"https://api.dicebear.com/7.x/big-ears/png?seed=Max")
+Topic.find_or_create_by!(topic:"Food", topicImageURL:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/800px-Good_Food_Display_-_NCI_Visuals_Online.jpg")
+Topic.find_or_create_by!(topic:"Movie", topicImageURL:"https://c4.wallpaperflare.com/wallpaper/22/762/507/film-movie-filmmaker-movie-director-wallpaper-preview.jpg")
+Topic.find_or_create_by!(topic:"Music", topicImageURL:"https://variety.com/wp-content/uploads/2022/07/Music-Streaming-Wars.jpg?w=1000&h=563&crop=1")
+Topic.find_or_create_by!(topic:"Sports", topicImageURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1iBbb4momQgc7mrV3sBZbkoyiB2g1VIMQyA&usqp=CAU")
+Topic.find_or_create_by!(topic:"Travel", topicImageURL:"https://www.thebeijinger.com/sites/default/files/thebeijinger/blog-images/265699/10-common-travel-mistakes-you-can-avoid.jpg")
 
-User.find_or_create_by!(firstName:"Emma",
-            lastName:"Smith",
-            username:"emmasmith",
-            password_digest:"$2a$12$wtzLlVl6kkBlfrTqkDgkBOuSlevDt7GU93mPaK/fPlF6JW2sO6IIe",
-            bio:"I love reading",
-            gender:1,
-            phoneNo:"0123456789",
-            profileImageURL:"https://api.dicebear.com/7.x/big-ears/png?seed=Lily")
-
-User.find_or_create_by!(firstName:"Admin",
-            lastName:"Test Account",
-            username:"admin",
-            password_digest:"$2a$12$wtzLlVl6kkBlfrTqkDgkBOuSlevDt7GU93mPaK/fPlF6JW2sO6IIe",
-            bio:"This is the admin page",
-            gender:1,
-            phoneNo:"0123456789",
-            profileImageURL:"https://api.dicebear.com/7.x/big-ears/png?seed=Lily")
-
-Topic.find_or_create_by!(topic:"Pottery", topicImageURL:"https://picsum.photos/800/300")
-Topic.find_or_create_by!(topic:"Photography", topicImageURL:"https://picsum.photos/800/300")
-Topic.find_or_create_by!(topic:"Cooking", topicImageURL:"https://picsum.photos/800/300")
-Topic.find_or_create_by!(topic:"Dancing", topicImageURL:"https://picsum.photos/800/300")
-
-Post.find_or_create_by!(title:"Pottery for beginners", 
-                        tags:"#pottery#beginner",
-                        contentType: 0,
-                        content:"This is a post about pottery", 
-                        contentImageURL:"", 
-                        topic_id:1, 
-                        user_id:1) 
-
-Post.find_or_create_by!(title:"Photography tips", 
-                        tags:"#photography#tips",
-                        contentType: 0,
-                        content:"Here are some photography tips", 
-                        contentImageURL:"", 
-                        topic_id:2, 
-                        user_id:2) 
-
-Post.find_or_create_by!(title:"Delicious recipes", 
-                        tags:"#cooking#recipes",
-                        contentType: 1,
-                        content:"Check out these delicious recipes", 
-                        contentImageURL:"https://picsum.photos/800/300", 
-                        topic_id:3, 
-                        user_id:3) 
-
-Post.find_or_create_by!(title:"Learn to dance", 
-                        tags:"#dancing#learn",
-                        contentType: 1,
-                        content:"Join our dance classes and learn to dance", 
-                        contentImageURL:"https://picsum.photos/800/300", 
-                        topic_id:4, 
-                        user_id:4) 
-
-Post.find_or_create_by!(title:"Pottery techniques", 
-                        tags:"#pottery#techniques",
-                        contentType: 1,
-                        content:"Learn advanced pottery techniques", 
-                        contentImageURL:"https://picsum.photos/800/300", 
-                        topic_id:1, 
-                        user_id:1) 
-  
